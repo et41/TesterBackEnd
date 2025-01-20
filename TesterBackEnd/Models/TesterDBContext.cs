@@ -7,7 +7,7 @@ namespace TesterBackEnd.Models
 
         public TesterDBContext(DbContextOptions<TesterDBContext> options) : base(options) { }
 
-        public virtual DbSet<Project> Projects { get; set; }
+        public virtual DbSet<Project> Project { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -17,7 +17,7 @@ namespace TesterBackEnd.Models
                 entity.HasKey(k => k.Id);
 
             });
-            OnModelCreating(modelBuilder);
+            OnModelCreatingPartial(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
