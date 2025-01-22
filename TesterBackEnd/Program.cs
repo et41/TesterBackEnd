@@ -18,8 +18,15 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    builder.Services.AddDbContext<TesterDBContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+else
+{
+    builder.Services.AddDbContext<TesterDBContext>(options =>
+    options.UseSqlServer(Environment.GetEnvironmentVariable("AZURE_SQL_CONNECTIONSTRING")));
 }
 
 app.UseHttpsRedirection();
