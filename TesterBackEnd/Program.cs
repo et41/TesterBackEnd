@@ -10,24 +10,28 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<TesterDBContext>(options => options.UseSqlServer(connectionString));
+//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+//builder.Services.AddDbContext<TesterDBContext>(options => options.UseSqlServer(connectionString));
 
-var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (builder.Environment.IsDevelopment())
 {
-    builder.Services.AddDbContext<TesterDBContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    builder.Services.AddDbContext<TesterDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 }
 else
 {
     builder.Services.AddDbContext<TesterDBContext>(options =>
     options.UseSqlServer(Environment.GetEnvironmentVariable("AZURE_SQL_CONNECTIONSTRING")));
 }
+
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment()) 
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+} 
 
 app.UseHttpsRedirection();
 
