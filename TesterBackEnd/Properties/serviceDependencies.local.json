@@ -8,12 +8,11 @@
       "connectionId": "ConnectionStrings:DefaultConnection"
     },
     "mssql2": {
-      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ServiceLinker/locations/australiaeast/connectors/ConnectionStringsAzuredb_0525C4167C",
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('serviceConnectorResourceGroupName')]/providers/Microsoft.ServiceLinker/locations/australiaeast/connectors/ConnectionStringsAzuredb_77F6E4BDC9",
       "secretStore": null,
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/testerbackenddbserver/databases/TesterBackEnd_db",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/testerbackenddbserver/databases/TesterBackEnd_db",
       "type": "mssql.azure",
-      "connectionId": "ConnectionStrings:Azure-db",
-      "dynamicId": null
+      "connectionId": "ConnectionStrings:Azure-db"
     }
   }
 }
