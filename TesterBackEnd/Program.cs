@@ -10,9 +10,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.ConfigureSwaggerGen(setup =>
+{
+    setup.SwaggerDoc("V1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "Tester App",
+        Version = "V1"
+    });
+});
+
+
 //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 //builder.Services.AddDbContext<TesterDBContext>(options => options.UseSqlServer(connectionString));
-
 
 // Configure the HTTP request pipeline.
 if (builder.Environment.IsDevelopment())
@@ -32,8 +41,7 @@ app.UseSwagger();
 if (app.Environment.IsDevelopment()) 
 {
     app.UseSwaggerUI();
-} 
-
+}
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
