@@ -10,16 +10,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.ConfigureSwaggerGen(setup =>
-{
-    setup.SwaggerDoc("V1", new Microsoft.OpenApi.Models.OpenApiInfo
-    {
-        Title = "Tester App",
-        Version = "V1"
-    });
-});
-
-
 //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 //builder.Services.AddDbContext<TesterDBContext>(options => options.UseSqlServer(connectionString));
 
@@ -31,16 +21,22 @@ if (builder.Environment.IsDevelopment())
 else
 {
     builder.Services.AddDbContext<TesterDBContext>(options =>
-    options.UseSqlServer(Environment.GetEnvironmentVariable("AZURE_SQL_CONNECTIONSTRING")));
+    options.UseSqlServer(Environment.GetEnvironmentVariable("DefaultConnection")));
 }
 
 var app = builder.Build();
 
 app.UseSwagger();
 
-if (app.Environment.IsDevelopment()) 
+if (app.Environment.IsDevelopment())
 {
+    //app.UseSwaggerUI(a =>
+    //{
+    //   a.SwaggerEndpoint("/swagger/v1/swagger.json", "Tester API V1");
+    //   a.RoutePrefix = string.Empty;
+    //});
     app.UseSwaggerUI();
+
 }
 app.UseHttpsRedirection();
 

@@ -4,7 +4,7 @@ using TesterBackEnd.Models;
 namespace TesterBackEnd.Controllers
 {
     [ApiController]
-    [Route("/")]
+    [Route("[controller]")]
     public class ProjectController : ControllerBase
     {
         private readonly TesterDBContext _dbContext;

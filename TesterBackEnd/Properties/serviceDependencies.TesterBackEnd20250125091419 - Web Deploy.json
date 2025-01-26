@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "mssql2": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('serviceConnectorResourceGroupName')]/providers/Microsoft.Web/sites/TesterBackEnd20250125091419/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsAzuredb_CFA367961B",
+      "secretStore": null,
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/testerbackenddbserver/databases/TesterBackEnd_db",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:Azure-db",
+      "dynamicId": null
+    }
+  }
+}
