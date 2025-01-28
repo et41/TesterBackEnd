@@ -10,20 +10,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-//builder.Services.AddDbContext<TesterDBContext>(options => options.UseSqlServer(connectionString));
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<TesterDBContext>(options => options.UseSqlServer(connectionString));
 
 // Configure the HTTP request pipeline.
-if (builder.Environment.IsDevelopment())
-{
-    builder.Services.AddDbContext<TesterDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-}
-else
-{
-    builder.Services.AddDbContext<TesterDBContext>(options =>
-    options.UseSqlServer(Environment.GetEnvironmentVariable("DefaultConnection")));
-}
-
 var app = builder.Build();
 
 app.UseSwagger();
