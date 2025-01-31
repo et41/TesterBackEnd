@@ -17,6 +17,7 @@ namespace TesterBackEnd.Models
                 entity.HasKey(k => k.Id);
 
             });
+
             OnModelCreatingPartial(modelBuilder);
         }
 
