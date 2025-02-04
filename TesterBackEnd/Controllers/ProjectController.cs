@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TesterBackEnd.Models;
 
 namespace TesterBackEnd.Controllers
@@ -62,22 +63,29 @@ namespace TesterBackEnd.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult PutProject(int id, Project updatedProject) 
+        public async Task<ActionResult> PutProject(int id, Project updatedProject) 
         {
             if ( id != updatedProject.Id)
             {
                 return BadRequest("Project ID mismatch");
             }
 
-            var existingProject = _dbContext.Project.Find(id);
-
+            var existingProject = await _dbContext.Project.FirstOrDefaultAsync(p => p.Id == id);
+             
             if (existingProject == null) 
             {
                 return NotFound();
             }
 
             _dbContext.Entry(existingProject).CurrentValues.SetValues(updatedProject);
-            _dbContext.SaveChanges();
+            try
+            {
+                await _dbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
 
             return NoContent();
 
