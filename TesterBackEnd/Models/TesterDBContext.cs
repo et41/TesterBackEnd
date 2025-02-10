@@ -14,8 +14,18 @@ namespace TesterBackEnd.Models
         {
             modelBuilder.Entity<Project>(entity =>
             {
-                entity.HasKey(k => k.Id);
+                entity.HasKey(e => e.Id);
+                entity.HasMany(e => e.Transformers)
+                      .WithOne(t => t.Project)
+                      .HasForeignKey(t => t.ProjectId);
+            });
 
+            modelBuilder.Entity<Transformer>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasOne(e => e.Project)
+                      .WithMany(p => p.Transformers)
+                      .HasForeignKey(e => e.ProjectId);
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -7,7 +7,7 @@ namespace TesterBackEnd.Models
     {
         public int Id { get; set; }
         public int ProjectId { get; set; }
-        //HVVoltage  must accept 2.5 like numbers 
+        public int Pieces { get; set; }
 
         public double HvVoltage { get; set; }
         public double LvVoltage { get; set; }
@@ -27,6 +27,10 @@ namespace TesterBackEnd.Models
         public int GuaranteedLoadLoss { get; set; }
         public string? TestDate { get; set; }
         public double GuaranteedShortCircuitVoltage { get; set; }
+
+        public ICollection<Transformer> Transformers { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
 
 
