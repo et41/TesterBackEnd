@@ -1,7 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using TesterBackEnd.Models;
+using AutoMapper;
+using TesterBackEnd;
+
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 // Add services to the container.
 
