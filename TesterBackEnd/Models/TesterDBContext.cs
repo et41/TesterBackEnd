@@ -9,6 +9,7 @@ namespace TesterBackEnd.Models
         public virtual DbSet<Project> Project { get; set; }
 
         public virtual DbSet<Transformer> Transformer { get; set; }
+        public virtual DbSet<ActiveTestReport> ActiveTestReport { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,7 +30,12 @@ namespace TesterBackEnd.Models
                       .WithMany(p => p.Transformers)
                       .HasForeignKey(t => t.ProjectId)
                       .OnDelete(DeleteBehavior.Cascade);
+                entity.HasOne(t => t.ActiveTestReport)
+                        .WithOne(a => a.Transformer)
+                        .HasForeignKey <ActiveTestReport>(a => a.TransformerId)
+                        .OnDelete(DeleteBehavior.Cascade);
             });
+
 
             OnModelCreatingPartial(modelBuilder);
         }

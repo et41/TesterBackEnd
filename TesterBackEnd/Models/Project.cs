@@ -27,8 +27,7 @@ namespace TesterBackEnd.Models
         public int GuaranteedLoadLoss { get; set; }
         public string? TestDate { get; set; }
         public double GuaranteedShortCircuitVoltage { get; set; }
-
-        public ICollection<Transformer> Transformers { get; set; }
+        public ICollection<Transformer>? Transformers { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
 
