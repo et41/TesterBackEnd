@@ -69,7 +69,6 @@ namespace TesterBackEnd.Controllers
                     Project = project
                 };
                 project.Transformers.Add(transformer);
-
             }
 
             // Set the ProjectId for the transformers
@@ -103,32 +102,51 @@ namespace TesterBackEnd.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> PutProject(int id, [FromBody] ProjectDTO updatedProjectDTO)
+        public async Task<IActionResult> UpdateProject(int id, ProjectDTO projectDTO)
         {
-            if (id != updatedProjectDTO.Id)
-            {
-                return BadRequest("Project ID mismatch");
-            }
+            var project = await _dbContext.Project
+                .Include(p => p.Transformers)
+                .FirstOrDefaultAsync(p => p.Id == id);
 
-            var existingProject = await _dbContext.Project.Include(p => p.Transformers).FirstOrDefaultAsync(p => p.Id == id);
-            if (existingProject == null)
+            if (project == null)
             {
                 return NotFound();
             }
 
-            // Map the updated DTO to the entity
-            _mapper.Map(updatedProjectDTO, existingProject);
+            // Use AutoMapper to map the properties from DTO to entity
+            _mapper.Map(projectDTO, project);
 
-            try
+            // Mark the entity as modified to ensure changes are tracked
+            _dbContext.Entry(project).State = EntityState.Modified;
+
+            // Handle transformer records manually since they have special logic
+            if (project.Transformers.Count > projectDTO.Pieces)
             {
-                await _dbContext.SaveChangesAsync();
+                var extraTransformers = project.Transformers
+                    .OrderByDescending(t => t.Id)
+                    .Take(project.Transformers.Count - projectDTO.Pieces);
+
+                _dbContext.Transformer.RemoveRange(extraTransformers);
             }
-            catch (Exception ex)
+            else if (project.Transformers.Count < projectDTO.Pieces)
             {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+                int newCount = projectDTO.Pieces - project.Transformers.Count;
+                for (int i = 0; i < newCount; i++)
+                {
+                    project.Transformers.Add(new Transformer
+                    {
+                        SerialNumber = GenerateSerialNumber(project.ProjectId, project.Transformers.Count + 1),
+                        Project = project,
+                    });
+                }
             }
 
+            await _dbContext.SaveChangesAsync();
             return NoContent();
         }
+
+
+
+
     }
 }
