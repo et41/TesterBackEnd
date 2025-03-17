@@ -4,13 +4,17 @@
     {
         public int Id { get; set; }
         public string? TestDate { get; set; }
-        public double? TtrPhaseURatio { get; set; }
-        public double? TtrPhaseVRatio { get; set; }
-        public double? TtrPhaseWRatio { get; set; }
-        public double? TtrPhaseUDiff { get; set; } 
-        public double? TtrPhaseVDiff { get; set; }
-        public double? TtrPhaseWDiff { get; set; } 
+        public List<double>? TtrPhaseURatio { get; set; }
+        public List<double>? TtrPhaseVRatio { get; set; }
+        public List<double>? TtrPhaseWRatio { get; set; }
+        public List<double>? TtrPhaseUDiff { get; set; } 
+        public List<double>? TtrPhaseVDiff { get; set; }
+        public List<double>? TtrPhaseWDiff { get; set; } 
+        public List<double>? TtrPhaseUAngle { get; set; }
+        public List<double>? TtrPhaseVAngle { get; set; }
+        public List<double>? TtrPhaseWAngle { get; set; }
         public string? VectorGroup { get; set; }
+
         public string? Comments { get; set; }
         public double? TemperaturePhaseA { get; set; }
         public double? TemperaturePhaseB { get; set; }
@@ -24,7 +28,6 @@
         public List<double>? HvLv { get; set; }
         public int TransformerId { get; set; } 
         public Transformer? Transformer { get; set; } // Navigation property
-
 
     }
 }
