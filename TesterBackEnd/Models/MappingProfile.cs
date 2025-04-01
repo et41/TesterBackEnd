@@ -21,6 +21,19 @@ namespace TesterBackEnd
 
             // Map from Transformer to TransformerDTO
             CreateMap<Transformer, TransformerDTO>();
+
+            //Map from ActiveTestReportDTO to ActiveTestReport
+            CreateMap<ActiveTestReportDTO, ActiveTestReport>();
+
+            //Map from ActiveTestReport to ActiveTestReportDTO
+            CreateMap<ActiveTestReport, ActiveTestReportDTO>();
+
+            //map from HvResistanceDTO to HvResistance
+            CreateMap<HvResistanceDTO, HvResistance>();
+
+            //map from HvResistance to HvResistanceDTO
+            CreateMap<HvResistance, HvResistanceDTO>();
+
         }
     }
 }
