@@ -34,7 +34,6 @@ namespace TesterBackEnd.Models
         public List<double>? LvCore { get; set; }
         public List<double>? HvCore { get; set; }
         public List<double>? HvLv { get; set; }
-
         public List<double>? CoreTank { get; set; }
         public int TransformerId { get; set; } 
         public Transformer? Transformer { get; set; } // Navigation property
