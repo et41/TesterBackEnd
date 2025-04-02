@@ -16,9 +16,7 @@ namespace TesterBackEnd.Models
         public string? CustomerName { get; set; }
         public string? VectorGroup { get; set; }
         public int Power { get; set; }
-
         public double DiffBetweenTaps { get; set; }
-
         public int LVTurns { get; set; }
         public int HVTurns { get; set; }
         public int TapTurns { get; set; }
