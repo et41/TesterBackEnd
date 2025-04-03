@@ -1,4 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using System.Text.Json;
+
 
 namespace TesterBackEnd.Models
 {
@@ -31,11 +34,17 @@ namespace TesterBackEnd.Models
                       .WithMany(p => p.Transformers)
                       .HasForeignKey(t => t.ProjectId)
                       .OnDelete(DeleteBehavior.Cascade);
-                entity.HasOne(t => t.ActiveTestReport)
-                        .WithOne(a => a.Transformer)
-                        .HasForeignKey <ActiveTestReport>(a => a.TransformerId)
-                        .OnDelete(DeleteBehavior.Cascade);
-            });/*
+
+                entity.HasMany(t => t.ActiveTestReports).WithOne(a => a.Transformer).HasForeignKey(a => a.TransformerId).OnDelete(DeleteBehavior.Cascade);
+            });
+            modelBuilder.Entity<ActiveTestReport>()
+         .Property(a => a.HvResistancesBetweenPhases)
+         .HasConversion(new ValueConverter<List<List<double?>>, string>(
+             v => JsonSerializer.Serialize(v, new JsonSerializerOptions()),  // Serialize to JSON string
+             v => JsonSerializer.Deserialize<List<List<double?>>>(v, new JsonSerializerOptions()) // Deserialize from JSON string
+         ));
+
+            /*
             //modelBuilder.Entity<HvResistance>()
              .HasOne(hr => hr.ActiveTestReport)
              .WithMany(atr => atr.HvResistances)

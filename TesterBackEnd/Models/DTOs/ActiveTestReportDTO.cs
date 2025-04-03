@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TesterBackEnd.Models.DTOs
 {
@@ -21,7 +22,9 @@ namespace TesterBackEnd.Models.DTOs
         public double? TemperaturePhaseB { get; set; } = new();
         public double? TemperaturePhaseC { get; set; } = new();
         public ObservableCollection<double?>? LvResistancesBetweenPhases { get; set; } = new();
-        //public ObservableCollection<ObservableCollection<double?>>? HvResistancesBetweenPhases { get; set; } = new();
+
+        [Column(TypeName = "json")]
+        public ObservableCollection<ObservableCollection<double?>>? HvResistancesBetweenPhases { get; set; } = new();
         public ObservableCollection<double?>? HvImbalances { get; set; } = new();
         public ObservableCollection<double?>? LvPhaseToPhaseImbalances { get; set; } = new();
         public ObservableCollection<double?>? LvPhaseToNeutralImbalances { get; set; } = new();

@@ -1,4 +1,6 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Net.Mime;
 
 namespace TesterBackEnd.Models
 {
@@ -22,9 +24,11 @@ namespace TesterBackEnd.Models
         public double? TemperaturePhaseB { get; set; }
         public double? TemperaturePhaseC { get; set; }
         public List<double>? LvResistancesBetweenPhases { get; set; }
-        //public List<HvResistance>? HvResistances { get; set; }  
 
-        //public List<double>? HvImbalances { get; set; }
+        [Column(TypeName = "json")]
+        public List<List<double?>>? HvResistancesBetweenPhases { get; set; }  
+
+        public List<double>? HvImbalances { get; set; }
         public List<double?>? LvPhaseToPhaseImbalances { get; set; }
 
         public List<double>? LvPhaseToNeutralImbalances { get; set; }
