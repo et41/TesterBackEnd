@@ -1,41 +1,42 @@
-﻿namespace TesterBackEnd.Models.DTOs
+﻿using System.Collections.ObjectModel;
+
+namespace TesterBackEnd.Models.DTOs
 {
     public class ActiveTestReportDTO
     {
         public int Id { get; set; }
-        public DateTime? TestDate { get; set; }
-        public List<double>? TtrPhaseURatio { get; set; }
-        public List<double>? TtrPhaseVRatio { get; set; }
-        public List<double>? TtrPhaseWRatio { get; set; }
-        public List<double>? TtrPhaseUDiff { get; set; }
-        public List<double>? TtrPhaseVDiff { get; set; }
-        public List<double>? TtrPhaseWDiff { get; set; }
-        public List<double>? TtrPhaseUAngle { get; set; }
-        public List<double>? TtrPhaseVAngle { get; set; }
-        public List<double>? TtrPhaseWAngle { get; set; }
+        public DateTime? TestDate { get; set; } = new();
+        public ObservableCollection<double?> TtrPhaseURatio { get; set; } = new();
+        public ObservableCollection<double?> TtrPhaseVRatio { get; set; } = new();
+        public ObservableCollection<double?> TtrPhaseWRatio { get; set; } = new();
+        public ObservableCollection<double?>? TtrPhaseUDiff { get; set; } = new();
+        public ObservableCollection<double?>? TtrPhaseVDiff { get; set; } = new();
+        public ObservableCollection<double?>? TtrPhaseWDiff { get; set; } = new();
+        public ObservableCollection<double?>? TtrPhaseUAngle { get; set; } = new();
+        public ObservableCollection<double?>? TtrPhaseVAngle { get; set; } = new();
+        public ObservableCollection<double?>? TtrPhaseWAngle { get; set; } = new();
         public string? VectorGroup { get; set; }
-
         public string? Comments { get; set; }
-        public double? TemperaturePhaseA { get; set; }
-        public double? TemperaturePhaseB { get; set; }
-        public double? TemperaturePhaseC { get; set; }
-        public List<double>? LvResistancesBetweenPhases { get; set; }
-        public List<HvResistanceDTO>? HvResistances { get; set; }
+        public double? TemperaturePhaseA { get; set; } = new();
+        public double? TemperaturePhaseB { get; set; } = new();
+        public double? TemperaturePhaseC { get; set; } = new();
+        public ObservableCollection<double?>? LvResistancesBetweenPhases { get; set; } = new();
+        //public ObservableCollection<ObservableCollection<double?>>? HvResistancesBetweenPhases { get; set; } = new();
+        public ObservableCollection<double?>? HvImbalances { get; set; } = new();
+        public ObservableCollection<double?>? LvPhaseToPhaseImbalances { get; set; } = new();
+        public ObservableCollection<double?>? LvPhaseToNeutralImbalances { get; set; } = new();
 
-        public List<double>? HvImbalances { get; set; }
-        public List<double?>? LvPhaseToPhaseImbalances { get; set; }
-
-        public List<double>? LvPhaseToNeutralImbalances { get; set; }
-
-        public List<double>? LvResistancesToNeutral { get; set; }
-        public List<double>? HvResistancesToNeutral { get; set; }
-        public List<double>? LvCore { get; set; }
-        public List<double>? HvCore { get; set; }
-        public List<double>? HvLv { get; set; }
+        public ObservableCollection<double?>? LvResistancesToNeutral { get; set; } = new();
+        public ObservableCollection<double?>? HvResistancesToNeutral { get; set; } = new();
+        public ObservableCollection<double?>? LvCore { get; set; } = new();
+        public ObservableCollection<double?>? HvCore { get; set; } = new();
+        public ObservableCollection<double?>? HvLv { get; set; } = new();
+        public ObservableCollection<double?>? CoreTank { get; set; } = new();
         public int TransformerId { get; set; }
-        public List<TransformerDTO> Transformers { get; set; }
 
+        //public ActiveTestReport Clone() => MemberwiseClone() as ActiveTestReport;   
+        ///public Transformer? Transformer { get; set; } // Navigation property
 
-        public List<double>? CoreTank { get; set; }
+        public List<TransformerDTO>? Transformers { get; set; }
     }
 }

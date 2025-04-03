@@ -19,14 +19,13 @@
         public int GuaranteedNoLoadLoss { get; set; }
         public int GuaranteedLoadLoss { get; set; }
         public double GuaranteedShortCircuitVoltage { get; set; }
-        public ICollection<TransformerDTO> Transformers { get; set; }
+        public ICollection<TransformerDTO>? Transformers { get; set; }
     }
 
     public class TransformerDTO
     {
         public int Id { get; set; }
         public string? SerialNumber { get; set; }
-
         public List<ActiveTestReportDTO>? ActiveTestReports {get; set;}  
     }
 

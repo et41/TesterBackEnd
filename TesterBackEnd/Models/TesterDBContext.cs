@@ -35,12 +35,13 @@ namespace TesterBackEnd.Models
                         .WithOne(a => a.Transformer)
                         .HasForeignKey <ActiveTestReport>(a => a.TransformerId)
                         .OnDelete(DeleteBehavior.Cascade);
-            });
-            modelBuilder.Entity<HvResistance>()
+            });/*
+            //modelBuilder.Entity<HvResistance>()
              .HasOne(hr => hr.ActiveTestReport)
              .WithMany(atr => atr.HvResistances)
             .HasForeignKey(hr => hr.ActiveTestReportId)
                .OnDelete(DeleteBehavior.Cascade);
+            */
 
 
             OnModelCreatingPartial(modelBuilder);

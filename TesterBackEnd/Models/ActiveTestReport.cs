@@ -22,9 +22,9 @@ namespace TesterBackEnd.Models
         public double? TemperaturePhaseB { get; set; }
         public double? TemperaturePhaseC { get; set; }
         public List<double>? LvResistancesBetweenPhases { get; set; }
-        public List<HvResistance>? HvResistances { get; set; }  
+        //public List<HvResistance>? HvResistances { get; set; }  
 
-        public List<double>? HvImbalances { get; set; }
+        //public List<double>? HvImbalances { get; set; }
         public List<double?>? LvPhaseToPhaseImbalances { get; set; }
 
         public List<double>? LvPhaseToNeutralImbalances { get; set; }

@@ -9,9 +9,6 @@
         public bool? TestReport { get; set; }
         public int? ProjectId { get; set; }
         public Project? Project { get; set; } // Navigation property
-
-        public int TransformerId { get; set; }
-
-        public ActiveTestReport? ActiveTestReport { get; set; }
+        public List<ActiveTestReport>? ActiveTestReport { get; set; }
     }
 }

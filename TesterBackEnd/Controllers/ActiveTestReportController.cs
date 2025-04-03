@@ -62,5 +62,18 @@ namespace TesterBackEnd.Controllers
             var createdActiveTestReportDTO = _mapper.Map<ActiveTestReportDTO>(activeTestReport);
             return Ok(createdActiveTestReportDTO);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteActiveTestReport(int id)
+        {
+            var activeTestReport = await _dbContext.ActiveTestReport.FindAsync(id);
+            if (activeTestReport == null)
+            {
+                return NotFound();
+            }
+            _dbContext.ActiveTestReport.Remove(activeTestReport);
+            await _dbContext.SaveChangesAsync();
+            return NoContent();
+        }
     }
 }
