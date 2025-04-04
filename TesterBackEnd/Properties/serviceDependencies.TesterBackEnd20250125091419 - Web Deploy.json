@@ -3,13 +3,6 @@
     "apis2": {
       "ignored": "true",
       "type": "apis.azure"
-    },
-    "mssql1": {
-      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('serviceConnectorResourceGroupName')]/providers/Microsoft.Web/sites/TesterBackEnd20250125091419/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsDefaultConnection_B10DD1E0A1",
-      "secretStore": null,
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/testerbackenddbserver/databases/TesterBackEnd_db",
-      "type": "mssql.azure",
-      "connectionId": "ConnectionStrings:DefaultConnection"
     }
   }
 }

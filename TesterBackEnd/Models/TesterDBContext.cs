@@ -37,12 +37,15 @@ namespace TesterBackEnd.Models
 
                 entity.HasMany(t => t.ActiveTestReports).WithOne(a => a.Transformer).HasForeignKey(a => a.TransformerId).OnDelete(DeleteBehavior.Cascade);
             });
-            modelBuilder.Entity<ActiveTestReport>()
-         .Property(a => a.HvResistancesBetweenPhases)
-         .HasConversion(new ValueConverter<List<List<double?>>, string>(
-             v => JsonSerializer.Serialize(v, new JsonSerializerOptions()),  // Serialize to JSON string
-             v => JsonSerializer.Deserialize<List<List<double?>>>(v, new JsonSerializerOptions()) // Deserialize from JSON string
-         ));
+
+            modelBuilder.Entity<ActiveTestReport>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasOne(a => a.Transformer)
+                      .WithMany(t => t.ActiveTestReports)
+                      .HasForeignKey(a => a.TransformerId)
+                      .OnDelete(DeleteBehavior.Cascade);
+            });
 
             /*
             //modelBuilder.Entity<HvResistance>()

@@ -24,9 +24,9 @@ namespace TesterBackEnd.Models
         public double? TemperaturePhaseB { get; set; }
         public double? TemperaturePhaseC { get; set; }
         public List<double>? LvResistancesBetweenPhases { get; set; }
-
-        [Column(TypeName = "json")]
-        public List<List<double?>>? HvResistancesBetweenPhases { get; set; }  
+        public ObservableCollection<double?>? HvResistancesU { get; set; } = new();
+        public ObservableCollection<double?>? HvResistancesV { get; set; } = new();
+        public ObservableCollection<double?>? HvResistancesW { get; set; } = new();
 
         public List<double>? HvImbalances { get; set; }
         public List<double?>? LvPhaseToPhaseImbalances { get; set; }
