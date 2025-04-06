@@ -10,7 +10,7 @@ namespace TesterBackEnd
         {
             // Map from ProjectDTO to Project
             CreateMap<ProjectDTO, Project>()
-                .ForMember(dest => dest.Transformers, opt => opt.MapFrom(src => src.Transformers));
+     .ForMember(dest => dest.Transformers, opt => opt.Ignore());
 
             // Map from Project to ProjectDTO
             CreateMap<Project, ProjectDTO>()
