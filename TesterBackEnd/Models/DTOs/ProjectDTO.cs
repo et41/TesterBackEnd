@@ -16,6 +16,8 @@
         public int LVTurns { get; set; }
         public int HVTurns { get; set; }
         public int TapTurns { get; set; }
+        public double HVDesignRes { get; set; }
+        public double LVDesignRes { get; set; }
         public int GuaranteedNoLoadLoss { get; set; }
         public int GuaranteedLoadLoss { get; set; }
         public double GuaranteedShortCircuitVoltage { get; set; }

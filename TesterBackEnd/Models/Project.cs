@@ -20,7 +20,8 @@ namespace TesterBackEnd.Models
         public int LVTurns { get; set; }
         public int HVTurns { get; set; }
         public int TapTurns { get; set; }
-
+        public double HVDesignRes { get; set; }
+        public double LVDesignRes { get; set; }
         public int GuaranteedNoLoadLoss { get; set; }
         public int GuaranteedLoadLoss { get; set; }
         public string? TestDate { get; set; }
