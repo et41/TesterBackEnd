@@ -29,6 +29,7 @@ namespace TesterBackEnd.Controllers
             return Ok(activeTestReportDTOs);
         }
 
+/*
 
         [HttpGet("{id}")]
         public ActionResult<ActiveTestReportDTO> GetActiveTestReportById(int id)
@@ -42,6 +43,19 @@ namespace TesterBackEnd.Controllers
             }
             var activeTestReportDTO = _mapper.Map<ActiveTestReportDTO>(activeTestReport);
             return Ok(activeTestReportDTO);
+        }
+*/
+
+        [HttpGet("{id}")]
+        public ActionResult<TransformerDTO> GetTransformerById(int id)
+        {
+            var transformer = _dbContext.Transformer.Include(p => p.ActiveTestReports).FirstOrDefault(p => p.Id == id);
+            if(transformer == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(transformer);
         }
 
         [HttpPost]

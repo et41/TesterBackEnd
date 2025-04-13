@@ -24,11 +24,5 @@
         public ICollection<TransformerDTO>? Transformers { get; set; }
     }
 
-    public class TransformerDTO
-    {
-        public int Id { get; set; }
-        public string? SerialNumber { get; set; }
-        public List<ActiveTestReportDTO>? ActiveTestReports {get; set;}  
-    }
 
 }
