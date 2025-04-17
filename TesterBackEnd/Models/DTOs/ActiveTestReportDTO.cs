@@ -41,7 +41,7 @@ namespace TesterBackEnd.Models.DTOs
         public int TransformerId { get; set; }
 
         //public ActiveTestReport Clone() => MemberwiseClone() as ActiveTestReport;   
-        public TransformerDTO? Transformer { get; set; } // Navigation property
+        //public TransformerDTO? Transformer { get; set; } // Navigation property
 
     }
 }

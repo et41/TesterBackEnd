@@ -50,12 +50,14 @@ namespace TesterBackEnd.Controllers
         public ActionResult<TransformerDTO> GetTransformerById(int id)
         {
             var transformer = _dbContext.Transformer.Include(p => p.ActiveTestReports).FirstOrDefault(p => p.Id == id);
-            if(transformer == null)
+            var testReport = _dbContext.ActiveTestReport.Include(p => p.Transformer).Where(p => p.TransformerId == id).FirstOrDefault();
+            if (transformer == null)
             {
                 return NotFound();
             }
+            var activeTestReport = _mapper.Map<ActiveTestReportDTO>(testReport);
 
-            return Ok(transformer);
+            return Ok(activeTestReport);
         }
 
         [HttpPost]
