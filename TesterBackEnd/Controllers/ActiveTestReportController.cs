@@ -91,5 +91,28 @@ namespace TesterBackEnd.Controllers
             await _dbContext.SaveChangesAsync();
             return NoContent();
         }
+
+        //write put method to update active test report
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateActiveTestReport(int id, [FromBody] ActiveTestReportDTO activeTestReportDTO)
+        {
+            if (id != activeTestReportDTO.Id)
+            {
+                return BadRequest("Active Test Report ID mismatch");
+            }
+            var existingActiveTestReport = await _dbContext.ActiveTestReport.FindAsync(id);
+            if (existingActiveTestReport == null)
+            {
+                return NotFound();
+            }
+            // Map the DTO to the entity
+            _mapper.Map(activeTestReportDTO, existingActiveTestReport);
+            _dbContext.Entry(existingActiveTestReport).State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
+            return NoContent();
+        }
+
+
+
     }
 }
