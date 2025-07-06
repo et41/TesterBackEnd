@@ -10,5 +10,6 @@
         public int? ProjectId { get; set; }
         public Project? Project { get; set; } // Navigation property
         public List<ActiveTestReport>? ActiveTestReports { get; set; }
+        public Checklist? Checklist { get; set; } // Navigation property
     }
 }

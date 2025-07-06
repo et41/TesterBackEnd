@@ -15,6 +15,8 @@ namespace TesterBackEnd.Models
 
         public virtual DbSet<ActiveTestReport> ActiveTestReport { get; set; }
 
+        public virtual DbSet<Checklist> Checklist { get; set;}
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configure the Project entity
@@ -36,6 +38,7 @@ namespace TesterBackEnd.Models
                       .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasMany(t => t.ActiveTestReports).WithOne(a => a.Transformer).HasForeignKey(a => a.TransformerId).OnDelete(DeleteBehavior.Cascade);
+
             });
 
             modelBuilder.Entity<ActiveTestReport>(entity =>
