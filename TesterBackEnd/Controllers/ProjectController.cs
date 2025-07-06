@@ -66,7 +66,19 @@ namespace TesterBackEnd.Controllers
                 var transformer = new Transformer
                 {
                     SerialNumber = GenerateSerialNumber(projectDTO.ProjectId, i + 1),
-                    Project = project
+                    Project = project,
+                    Checklist = new Checklist
+                    {
+                        CreatedAt = DateTime.Now,
+                        UpdatedAt = DateTime.Now,
+                        IncomingCoreInsulation = false,
+                        WindingAssemblyInsulation = false,
+                        WindingAssemblyTTR = false,
+                        LidAssemblyInsulation = false,
+                        LidAssemblyTTR = false,
+                        TankAssemblyTests = false,
+                        LabTests = false
+                    }
                 };
                 project.Transformers.Add(transformer);
             }
