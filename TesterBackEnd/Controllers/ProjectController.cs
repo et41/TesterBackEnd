@@ -151,6 +151,18 @@ namespace TesterBackEnd.Controllers
                     {
                         SerialNumber = GenerateSerialNumber(project.ProjectId, project.Transformers.Count + 1),
                         Project = project,
+                        Checklist = new Checklist
+                        {
+                            CreatedAt = DateTime.Now,
+                            UpdatedAt = DateTime.Now,
+                            IncomingCoreInsulation = false,
+                            WindingAssemblyInsulation = false,
+                            WindingAssemblyTTR = false,
+                            LidAssemblyInsulation = false,
+                            LidAssemblyTTR = false,
+                            TankAssemblyTests = false,
+                            LabTests = false
+                        }
                     });
                 }
             }

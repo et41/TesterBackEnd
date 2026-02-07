@@ -111,6 +111,41 @@ namespace TesterBackEnd.Controllers
             return NoContent();
         }
 
+        [HttpPost("backfill")]
+        public async Task<IActionResult> BackfillMissingChecklists()
+        {
+            var transformersWithoutChecklist = await _dbContext.Transformer
+                .Where(t => t.Checklist == null)
+                .ToListAsync();
+
+            if (!transformersWithoutChecklist.Any())
+            {
+                return Ok(new { message = "All transformers already have checklists", created = 0 });
+            }
+
+            foreach (var transformer in transformersWithoutChecklist)
+            {
+                _dbContext.Checklist.Add(new Checklist
+                {
+                    TransformerId = transformer.Id,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    IncomingCoreInsulation = false,
+                    WindingAssemblyInsulation = false,
+                    WindingAssemblyTTR = false,
+                    LidAssemblyInsulation = false,
+                    LidAssemblyTTR = false,
+                    TankAssemblyTests = false,
+                    LabTests = false
+                });
+            }
+
+            await _dbContext.SaveChangesAsync();
+
+            _logger.LogInformation("Backfilled {Count} missing checklists", transformersWithoutChecklist.Count);
+            return Ok(new { message = $"Created {transformersWithoutChecklist.Count} checklists", created = transformersWithoutChecklist.Count });
+        }
+
         [HttpDelete("{id}")]
         public ActionResult DeleteChecklists(int id)
         {
