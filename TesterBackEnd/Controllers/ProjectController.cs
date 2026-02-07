@@ -24,6 +24,7 @@ namespace TesterBackEnd.Controllers
         {
             var projects = _dbContext.Project
                                       .Include(p => p.Transformers)
+                                          .ThenInclude(t => t.Checklist)
                                       .ToList();
             var projectDTOs = _mapper.Map<List<ProjectDTO>>(projects);
             return Ok(projectDTOs);
@@ -34,6 +35,7 @@ namespace TesterBackEnd.Controllers
         {
             var project = _dbContext.Project
                                     .Include(p => p.Transformers)
+                                        .ThenInclude(t => t.Checklist)
                                     .FirstOrDefault(p => p.Id == id);
             if (project == null)
             {

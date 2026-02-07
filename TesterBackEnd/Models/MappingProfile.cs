@@ -34,6 +34,12 @@ namespace TesterBackEnd
             //map from HvResistance to HvResistanceDTO
             CreateMap<HvResistance, HvResistanceDTO>();
 
+            // Map from ChecklistDTO to Checklist
+            CreateMap<ChecklistDTO, Checklist>();
+
+            // Map from Checklist to ChecklistDTO
+            CreateMap<Checklist, ChecklistDTO>();
+
         }
     }
 }
