@@ -15,11 +15,13 @@ namespace TesterBackEnd.Controllers
 
         private readonly TesterDBContext _dbContext;
         private readonly IMapper _mapper;
+        private readonly ILogger<CheckListController> _logger;
 
-        public CheckListController(TesterDBContext dbContext, IMapper mapper)
+        public CheckListController(TesterDBContext dbContext, IMapper mapper, ILogger<CheckListController> logger)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -61,28 +63,50 @@ namespace TesterBackEnd.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateChecklist(int id, ChecklistDTO checklistDto)
         {
+            _logger.LogInformation("PUT /checklist/{Id} called", id);
+
             if (checklistDto == null)
             {
+                _logger.LogWarning("ChecklistDTO is null");
                 return BadRequest("Checklist data is required");
             }
 
+            _logger.LogInformation("Received DTO - Id: {DtoId}, TransformerId: {TransformerId}, " +
+                "IncomingCoreInsulation: {IncomingCore}, WindingAssemblyInsulation: {WindingIns}, " +
+                "WindingAssemblyTTR: {WindingTTR}, LidAssemblyInsulation: {LidIns}, " +
+                "LidAssemblyTTR: {LidTTR}, TankAssemblyTests: {Tank}, LabTests: {Lab}",
+                checklistDto.Id, checklistDto.TransformerId,
+                checklistDto.IncomingCoreInsulation, checklistDto.WindingAssemblyInsulation,
+                checklistDto.WindingAssemblyTTR, checklistDto.LidAssemblyInsulation,
+                checklistDto.LidAssemblyTTR, checklistDto.TankAssemblyTests, checklistDto.LabTests);
+
             if (id != checklistDto.Id)
             {
+                _logger.LogWarning("ID mismatch: route {RouteId} != body {BodyId}", id, checklistDto.Id);
                 return BadRequest("ID mismatch");
             }
 
             var checklist = await _dbContext.Checklist.FindAsync(id);
             if (checklist == null)
             {
+                _logger.LogWarning("Checklist {Id} not found in database", id);
                 return NotFound();
             }
+
+            _logger.LogInformation("Before mapping - DB values: IncomingCore={IncomingCore}, WindingIns={WindingIns}, WindingTTR={WindingTTR}",
+                checklist.IncomingCoreInsulation, checklist.WindingAssemblyInsulation, checklist.WindingAssemblyTTR);
 
             // Map DTO to entity
             _mapper.Map(checklistDto, checklist);
             checklist.UpdatedAt = DateTime.Now;
 
+            _logger.LogInformation("After mapping - Entity values: IncomingCore={IncomingCore}, WindingIns={WindingIns}, WindingTTR={WindingTTR}",
+                checklist.IncomingCoreInsulation, checklist.WindingAssemblyInsulation, checklist.WindingAssemblyTTR);
+
             _dbContext.Entry(checklist).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
+
+            _logger.LogInformation("Checklist {Id} saved successfully", id);
 
             return NoContent();
         }
